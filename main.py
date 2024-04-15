@@ -11,11 +11,18 @@ def arquivos(caminho:str)->list:
 def juntaPDF(arquivos:list)->bool:
     merger = PdfWriter()
     for pdf in arquivos:
-        merger.append(pdf)
+        merger.append("./arquivos/"+pdf)
     merger.write("ArquivosUnidos.pdf")
     merger.close()
+    return True
 
 
-
-
-print(arquivos("./arquivos"))
+if __name__ == '__main__':
+    lista_arquivos = arquivos("./arquivos")
+    if len(lista_arquivos)>0:
+        if juntaPDF(lista_arquivos):
+            print("Arquivo gerado com sucesso.")
+        else:
+            print("Não foi possível gerar o arquivo.")
+    else:
+        print("Não há arquivos na pasta Arquivos.")
